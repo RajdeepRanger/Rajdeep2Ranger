@@ -28,7 +28,7 @@ td:hover, th:hover {background-color: rgb(226, 28, 28);}
 tr:nth-child(even) {background-color: #d9c2e7;}
 tr:nth-child(odd) {background-color: #62d9b0;}
 
-.rowspan { background-color: rgb(111, 126, 195);
+.rospan { background-color: rgb(111, 126, 195);
 }
 
 td:active {
