@@ -75,15 +75,46 @@ dd {
 }
 
 .professional {
-    background-color: cadetblue;
-    border: 10px solid black;
+    background-color: rgb(197, 239, 241);
+    
 }
 q{
     font-size: 18px; font-family: 'Times New Roman', Times, serif; margin-left:  8%;
 }
 
 
-i.professional {
+.bdr {
+    border: 10px solid palegoldenrod;
+}
+
+.About {
+    background-color: antiquewhite;
+}
+
+q.personal {
+    margin-left:1%;
+}
+
+i.italic {
     margin-left: 40%;
 }
 
+#special {
+    border: none;
+    border-collapse: none;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#special tr {
+    background-color: initial;
+}
+
+#special td {
+    background-color: initial;
+    border: 0px;
+    
+}
+#special img {
+    border-radius: 10%;
+}
