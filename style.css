@@ -20,7 +20,7 @@ tr {
 td {
     text-align:  center;
     height: 50px;
-    vertical-align: centre;
+    vertical-align: middle;
 }
 
 td:hover, th:hover {background-color: rgb(226, 28, 28);}
@@ -101,7 +101,6 @@ i.italic {
 
 #special {
     border: none;
-    border-collapse: none;
     margin-right: auto;
     margin-left: auto;
 }
