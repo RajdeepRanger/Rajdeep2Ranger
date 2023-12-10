@@ -117,3 +117,29 @@ i.italic {
 #special img {
     border-radius: 10%;
 }
+
+a:hover {
+    color: #0000FF;
+}
+
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+
+tr:hover {
+    background-color: #ffeb3b; 
+}
+
+
+#special img:hover {
+    border: 2px solid #ff5722; 
+    border-radius: 8%;
+}
+
+
+#bloog:hover {
+    color: #4caf50; 
+}
