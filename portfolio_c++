@@ -1,12 +1,808 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width-device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg">
-        <title> C++</title>  
-    </head>
-    <body>
-        <h1> Code of my latest project of C++ </h1>
-    </body>
+
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width-device-width, initial-scale=1.0">
+            <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg">
+            <title> C++</title>  
+        </head>
+        <body>
+            <h1> RPG Game Code </h1>
+    <p> <pre> #include <iostream>
+        #include <cstdlib>
+        #include <ctime>
+        #include <string>
+        
+        using namespace std;
+        
+        int main()
+        {
+            int str = 1;
+            int dex = 1;
+            int con = 1;
+            int inte = 1;
+            int PlayHit = 10;
+            int PlayAttack = 10;
+            int PlayDefence = 10;
+            int PlaySpeed = 10;
+            int PlayHp = 100;
+            int PlaySpAttack = 10;
+            int PlaySpDefence = 10;
+            int PlaySpHit = 10;
+            string Name = "a";
+            srand(time(0));
+            int Num = (rand() % 18 + 18);
+        
+            do
+            {
+                cout << "Please enter your character name!" << endl;
+                cin >> Name;
+                cout << "Please enter your stats without going over or under " << Num << " and last don't have any one stat be higher than 18." << endl;
+                cout << "str = Strength and dex = Dexterity" << endl;
+                cout << "strength" << endl;
+                cin >> str;
+                cout << "dex" << endl;
+                cin >> dex;
+               // cout << "con" << endl;
+               // cin >> con;
+               // cout << "inte" << endl;
+               // cin >> inte;
+        
+                if ((Num < str + dex ) || str > 18 || dex > 18 )
+                {
+                    cout << "Please put appropriate stats" << endl;
+                }
+            } while ((Num < str + dex ) || str > 18 || dex > 18 );
+        
+            PlayHit = PlayHit + ((str - 9));
+            PlayAttack = PlayAttack + ((str - 9));
+            PlaySpeed += (dex / 2);
+            PlaySpAttack = PlayHit + 4;
+        
+            cout << "\nYour ability to put damage stood at:" << PlayAttack << endl;
+            cout << "Your ability to hit someone stood at: " << PlayHit << endl;
+            cout << "Your ability to defence stood at: " << PlayDefence << endl;
+            cout << "you have " << PlayHp << " health points" << endl;
+            cout << "you have " << PlaySpeed << " speed" << endl;
+            cout << "you have " << PlaySpAttack << " for your magic damage" << endl;
+            cout << PlaySpHit << " is your ability to hit someone with magic" << endl;
+            cout << "you have " << PlaySpDefence << " for your magic armour\n" << endl;
+        
+            int enemyHP = 1;
+            int enemyHit = 1;
+            int enemyAt = 1;
+            int enemyDe = 1;
+            int enemySpeed = 1;
+            int enemySpA = 1;
+            int enemySpD = 1;
+            int enemySpHi = 1;
+        
+            int enemy = 1;
+            int userChoice = 0;
+        
+            bool Playon = true;
+        
+            for (enemy = 1; enemy <= 4; enemy++)
+            {
+                switch (enemy)
+                {
+                case 1:
+                    enemyAt += 3;
+                    enemyHP += 15;
+                    enemyHit += 3;
+                    enemyDe += 10;
+                    enemySpeed += 13;
+                    enemySpA += 6;
+                   // enemySpD += 11;
+                  //  enemySpHi += 17;
+                    cout << "You encountered with a boar" << endl;
+                    while (enemyHP > 0 && PlayHp > 0)
+                    {
+                        cout << "What you would do??\n" << endl;
+                        cout << "Tap 1 to attack " << endl;
+                        cout << "2 to do a special attack\n " << endl;
+        
+                        userChoice = 0;
+                        cin >> userChoice;
+        
+                        if (userChoice == 1)
+                        {
+                            cout << "You chose to attack\n" << endl;
+                            if (PlaySpeed < enemySpeed)
+                            {
+                                if (enemyHit > PlayDefence)
+                                {
+                                    cout << "The boar attacks, " << endl;
+                                    PlayHp -= enemyAt;
+                                    cout << "took hp of " << enemyAt << endl;
+                                }
+                                else if (enemyHit < PlayDefence)
+                                {
+                                    int rand1 = (rand() % 100 + 1);
+                                    if (rand1 >= 75)
+                                    {
+                                        cout << "The boar attacks, took hp of " <<enemyAt<< endl;
+        
+                                        PlayHp -= enemyAt;
+                                    }
+                                    else
+                                    {
+                                        cout << "\nPlayer defended the attack\n";
+                                    }
+                                }
+                                cout << "Player hp is  : \n" << PlayHp << endl;
+                            }
+                            if (PlayHit >= enemyDe)
+                            {
+                                cout << Name<< " attacks" << endl;
+                                enemyHP -= PlayAttack;
+                            }
+                            else if (PlayHit < enemyDe)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 75)
+                                {
+                                    cout << Name << "attacks" << endl;
+                                    enemyHP -= PlayAttack;
+                                }
+                                else
+                                    cout << "Enemy defended the attack\n";
+                            }
+                            if (enemyHP <= 0)
+                            {
+                                enemyHP = 0;
+                                cout << "Boar is dead" << endl;
+                                break;
+                            }
+                            if (PlayHp <= 0)
+                            {
+                                PlayHp = 0;
+                                cout << "You are dead" << endl;
+                                break;
+                            }
+                            else
+                                cout << "Boar Hp is  : " << enemyHP << endl;
+                            if (enemyHit > PlayDefence)
+                            {
+                                cout << "The boar attacks, " << endl;
+                                PlayHp -= enemyAt;
+                                cout << "took hp of " << enemyAt << endl;
+                            }
+                            else if (enemyHit < PlayDefence)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 75)
+                                {
+                                    cout << "The boar attacks, took hp of " << enemyAt << endl;
+        
+                                    PlayHp -= enemyAt;
+                                }
+                                else
+                                {
+                                    cout << "\nPlayer defended the attack\n";
+                                }
+                            }
+                            cout << "Player hp is  : \n" << PlayHp << endl;
+                        }
+                        else if (userChoice == 2)
+                        {
+                            cout << "You chose to make a special attack" << endl;
+                            if (PlaySpeed < enemySpeed)
+                            {
+                                if (enemyHit > PlayDefence)
+                                {
+                                    cout << "The boar attacks and took the hp of " << enemySpA << endl;
+                                    PlayHp -= enemySpA;
+                                }
+                                else if (enemyHit < PlayDefence)
+                                {
+                                    int rand1 = (rand() % 100 + 1);
+                                    if (rand1 >= 75)
+                                    {
+                                        cout << "The boar attacks and took the hp of " << enemySpA << endl;
+                                        PlayHp -= enemySpA;
+                                    }
+                                    else
+                                        cout << "you defended the attack" << endl;
+                                }
+                                cout << "PLayer hp is  : " << PlayHp << endl;
+                            }
+                            if (PlaySpHit >= enemySpD)
+                            {
+                                cout << Name << endl;
+                                enemyHP -= PlaySpAttack;
+                                cout << "You hit the enemy for " << PlaySpAttack << "Hitpoints" << endl;
+                            }
+                            else if (PlaySpHit < enemySpD)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 75)
+                                {
+                                    cout << "You attacked" << endl;
+                                    enemyHP -= PlaySpAttack;
+                                    cout << "You hit the enemy for " << PlaySpAttack << "Hitpoints" << endl;
+                                }
+                                else
+                                    cout << "Enemy defended the attack" << endl;
+                            }
+        
+                            if (enemyHP <= 0)
+                            {
+                                enemyHP = 0;
+                                cout << "Boar is dead" << endl;
+                                break;
+                            }
+                            if (PlayHp <= 0)
+                            {
+                                PlayHp = 0;
+                                cout << "You are dead" << endl;
+                                break;
+                            }
+                            else
+                                cout << "Boar Hp is  : " << enemyHP << endl;
+                            if (enemyHit > PlayDefence)
+                            {
+                                cout << "The boar attacks and took the hp of " << enemyAt << endl;
+                                PlayHp -= enemyAt;
+                            }
+                            else if (enemyHit < PlayDefence)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 75)
+                                {
+                                    cout << "The boar attacks and took the hp of " << enemyAt << endl;
+                                    PlayHp -= enemyAt;
+                                }
+                                else
+                                    cout << "you defended the attack" << endl;
+                            }
+                            cout << "Player hp is  : " << PlayHp << endl;
+                        }
+        
+                    } break;
+        
+        
+                case 2:
+                    enemyAt += 6;
+                    enemyHP += 30;
+                    enemyHit += 6;
+                    enemyDe += 20;
+                    enemySpeed += 18;
+                    enemySpA += 12;
+                   // enemySpD += 9;
+                   // enemySpHi += 17;
+                    cout << "You encountered with a Giant" << endl;
+                    while (enemyHP > 0 && PlayHp > 0)
+                    {
+                        cout << "What you would do??\n" << endl;
+                        cout << "Tap 1 to attack " << endl;
+                        cout << "2 to do a special attack\n " << endl;
+        
+                        userChoice = 0;
+                        cin >> userChoice;
+        
+                        if (userChoice == 1)
+                        {
+                            cout << "You chose to attack\n" << endl;
+                            if (PlaySpeed < enemySpeed)
+                            {
+                                if (enemyHit > PlayDefence)
+                                {
+                                    cout << "The giant attacks, " << endl;
+                                    PlayHp -= enemyAt;
+                                    cout << "took hp of " << enemyAt << endl;
+                                }
+                                else if (enemyHit < PlayDefence)
+                                {
+                                    int rand1 = (rand() % 100 + 1);
+                                    if (rand1 >= 75)
+                                    {
+                                        cout << "The giant attacks, took hp of " << enemyAt << endl;
+        
+                                        PlayHp -= enemyAt;
+                                    }
+                                    else
+                                    {
+                                        cout << "\nPlayer defended the attack\n";
+                                    }
+                                }
+                                cout << "Player hp is  : \n" << PlayHp << endl;
+                            }
+                            if (PlayHit >= enemyDe)
+                            {
+                                cout << Name << " attacks" << endl;
+                                enemyHP -= PlayAttack;
+                            }
+                            else if (PlayHit < enemyDe)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 75)
+                                {
+                                    cout << Name << "attacks" << endl;
+                                    enemyHP -= PlayAttack;
+                                }
+                                else
+                                    cout << "Enemy defended the attack\n";
+                            }
+                            if (enemyHP <= 0)
+                            {
+                                enemyHP = 0;
+                                cout << "giant is dead" << endl;
+                                break;
+                            }
+                            if (PlayHp <= 0)
+                            {
+                                PlayHp = 0;
+                                cout << "You are dead" << endl;
+                                break;
+                            }
+                            else
+                                cout << "giant Hp is  : " << enemyHP << endl;
+                            if (enemyHit > PlayDefence)
+                            {
+                                cout << "The giant attacks, " << endl;
+                                PlayHp -= enemyAt;
+                                cout << "took hp of " << enemyAt << endl;
+                            }
+                            else if (enemyHit < PlayDefence)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 75)
+                                {
+                                    cout << "The giant attacks, took hp of " << enemyAt << endl;
+        
+                                    PlayHp -= enemyAt;
+                                }
+                                else
+                                {
+                                    cout << "\nPlayer defended the attack\n";
+                                }
+                            }
+                            cout << "Player hp is  : \n" << PlayHp << endl;
+                        }
+                        else if (userChoice == 2)
+                        {
+                            cout << "You chose to make a special attack" << endl;
+                            if (PlaySpeed < enemySpeed)
+                            {
+                                if (enemyHit > PlayDefence)
+                                {
+                                    cout << "The giant attacks and took the hp of " << enemySpA << endl;
+                                    PlayHp -= enemySpA;
+                                }
+                                else if (enemyHit < PlayDefence)
+                                {
+                                    int rand1 = (rand() % 100 + 1);
+                                    if (rand1 >= 75)
+                                    {
+                                        cout << "The giant attacks and took the hp of " << enemySpA << endl;
+                                        PlayHp -= enemySpA;
+                                    }
+                                    else
+                                        cout << "you defended the attack" << endl;
+                                }
+                                cout << "PLayer hp is  : " << PlayHp << endl;
+                            }
+                            if (PlaySpHit >= enemySpD)
+                            {
+                                cout << Name << endl;
+                                enemyHP -= PlaySpAttack;
+                                cout << "You hit the enemy for " << PlaySpAttack << "Hitpoints" << endl;
+                            }
+                            else if (PlaySpHit < enemySpD)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 75)
+                                {
+                                    cout << "You attacked" << endl;
+                                    enemyHP -= PlaySpAttack;
+                                    cout << "You hit the enemy for " << PlaySpAttack << "Hitpoints" << endl;
+                                }
+                                else
+                                    cout << "Enemy defended the attack" << endl;
+                            }
+        
+                            if (enemyHP <= 0)
+                            {
+                                enemyHP = 0;
+                                cout << "Giant is dead" << endl;
+                                break;
+                            }
+                            if (PlayHp <= 0)
+                            {
+                                PlayHp = 0;
+                                cout << "You are dead" << endl;
+                                break;
+                            }
+                            else
+                                cout << "Boar Hp is  : " << enemyHP << endl;
+                            if (enemyHit > PlayDefence)
+                            {
+                                cout << "The giant attacks and took the hp of " << enemyAt << endl;
+                                PlayHp -= enemyAt;
+                            }
+                            else if (enemyHit < PlayDefence)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 75)
+                                {
+                                    cout << "The giant attacks and took the hp of " << enemyAt << endl;
+                                    PlayHp -= enemyAt;
+                                }
+                                else
+                                    cout << "you defended the attack" << endl;
+                            }
+                            cout << "PLayer hp is  : " << PlayHp << endl;
+                        }
+        
+                    } break;
+        
+                case 3:
+                    enemyAt+= 9;
+                    enemyHP = 30;
+                    enemyHit = 9;
+                    enemyDe = 30;
+                    enemySpeed = 23;
+                   enemySpA += 13;
+                   // enemySpD += 24;
+                   // enemySpHi += 20;
+                    cout << "\nYou encountered with a Vampire\n" << endl;
+                    while (enemyHP > 0 && PlayHp > 0)
+                    {
+                        cout << "What you would do??\n" << endl;
+                        cout << "Tap 1 to attack " << endl;
+                        cout << "2 to do a special attack\n " << endl;
+        
+                        userChoice = 0;
+                        cin >> userChoice;
+        
+                        if (userChoice == 1)
+                        {
+                            cout << "You chose to attack\n" << endl;
+                            if (PlaySpeed < enemySpeed)
+                            {
+                                if (enemyHit > PlayDefence)
+                                {
+                                    cout << "The Vampire attacks, " << endl;
+                                    PlayHp -= enemyAt;
+                                    cout << "took hp of " << enemyAt << endl;
+                                }
+                                else if (enemyHit < PlayDefence)
+                                {
+                                    int rand1 = (rand() % 100 + 1);
+                                    if (rand1 >= 75)
+                                    {
+                                        cout << "The Vampire attacks, took hp of " << enemyAt << endl;
+        
+                                        PlayHp -= enemyAt;
+                                    }
+                                    else
+                                    {
+                                        cout << "\nPlayer defended the attack\n";
+                                    }
+                                }
+                                cout << "Player hp is  : \n" << PlayHp << endl;
+                            }
+                            if (PlayHit >= enemyDe)
+                            {
+                                cout << Name << " attacks" << endl;
+                                enemyHP -= PlayAttack;
+                            }
+                            else if (PlayHit < enemyDe)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 75)
+                                {
+                                    cout << Name << " attacks" << endl;
+                                    enemyHP -= PlayAttack;
+                                }
+                                else
+                                    cout << "Enemy defended the attack\n";
+                            }
+                            if (enemyHP <= 0)
+                            {
+                                enemyHP = 0;
+                                cout << "Vampire is dead" << endl;
+                                break;
+                            }
+                            if (PlayHp <= 0)
+                            {
+                                PlayHp = 0;
+                                cout << "You are dead" << endl;
+                                break;
+                            }
+                            else
+                                cout << "Vampire Hp is  : " << enemyHP << endl;
+                            if (enemyHit > PlayDefence)
+                            {
+                                cout << "The Vampire attacks, " << endl;
+                                PlayHp -= enemyAt;
+                                cout << "took hp of " << enemyAt << endl;
+                            }
+                            else if (enemyHit < PlayDefence)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 75)
+                                {
+                                    cout << "The Vampire attacks, took hp of " << enemyAt << endl;
+        
+                                    PlayHp -= enemyAt;
+                                }
+                                else
+                                {
+                                    cout << "\nPlayer defended the attack\n";
+                                }
+                            }
+                            cout << "Player hp is  : \n" << PlayHp << endl;
+                        }
+                        else if (userChoice == 2)
+                        {
+                            cout << "You chose to make a special attack" << endl;
+                            if (PlaySpeed < enemySpeed)
+                            {
+                                if (enemyHit > PlayDefence)
+                                {
+                                    cout << "The Vampire attacks and took the hp of " << enemySpA << endl;
+                                    PlayHp -= enemyAt;
+                                }
+                                else if (enemySpA < PlayDefence)
+                                {
+                                    int rand1 = (rand() % 100 + 1);
+                                    if (rand1 >= 75)
+                                    {
+                                        cout << "The Vampire attacks and took the hp of " << enemySpA << endl;
+                                        PlayHp -= enemySpA;
+                                    }
+                                    else
+                                        cout << "you defended the attack" << endl;
+                                }
+                                cout << "PLayer hp is  : " << PlayHp << endl;
+                            }
+                            if (PlaySpHit >= enemySpD)
+                            {
+                                cout << Name << " attacks" << endl;
+                                enemyHP -= PlaySpAttack;
+                                cout << "You hit the enemy for " << PlaySpAttack << "Hitpoints" << endl;
+                            }
+                            else if (PlaySpHit < enemySpD)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 75)
+                                {
+                                    cout << "You attacked" << endl;
+                                    enemyHP -= PlaySpAttack;
+                                    cout << "You hit the enemy for " << PlaySpAttack << "Hitpoints" << endl;
+                                }
+                                else
+                                    cout << "Enemy defended the attack" << endl;
+                                if (enemyHit > PlayDefence)
+                                {
+                                    cout << "The Vampire attacks and took the hp of " << enemyAt << endl;
+                                    PlayHp -= enemyAt;
+                                }
+                                else if (enemyHit < PlayDefence)
+                                {
+                                    int rand1 = (rand() % 100 + 1);
+                                    if (rand1 >= 75)
+                                    {
+                                        cout << "The Vampire attacks and took the hp of " << enemySpA << endl;
+                                        PlayHp -= enemySpA;
+                                    }
+                                    else
+                                        cout << "you defended the attack" << endl;
+                                }
+                                cout << "PLayer hp is  : " << PlayHp << endl;
+        
+                            }
+        
+                            if (enemyHP <= 0)
+                            {
+                                enemyHP = 0;
+                                cout << "Vampire is dead" << endl;
+                                break;
+                            }
+                            if (PlayHp <= 0)
+                            {
+                                PlayHp = 0;
+                                cout << "You are dead" << endl;
+                                break;
+                            }
+                            else
+                                cout << "Vampire Hp is  : " << enemyHP << endl;
+                        }
+        
+                    } break;
+        
+                case 4:
+                    enemyAt = 19;
+                    enemyHP = 30;
+                    enemyHit = 25;
+                    enemyDe = 19;
+                    enemySpeed = 17;
+                    enemySpA += 23;
+                    //enemySpD += 13;
+                    //enemySpHi += 20;
+                    cout << "\nThe final battle with the Roxy\n" << endl;
+                    while (enemyHP > 0 && PlayHp > 0)
+                    {
+                        cout << "What you would do??\n" << endl;
+                        cout << "Tap 1 to attack " << endl;
+                        cout << "2 to do a special attack\n " << endl;
+        
+                        userChoice = 0;
+                        cin >> userChoice;
+        
+                        if (userChoice == 1)
+                        {
+                            cout << "You chose to attack\n" << endl;
+                            if (PlaySpeed < enemySpeed)
+                            {
+                                if (enemyHit > PlayDefence)
+                                {
+                                    cout << "The Roxy attacks, " << endl;
+                                    PlayHp -= enemyAt;
+                                    cout << "took hp of " << enemyAt << endl;
+                                }
+                                else if (enemyHit < PlayDefence)
+                                {
+                                    int rand1 = (rand() % 100 + 1);
+                                    if (rand1 >= 50)
+                                    {
+                                        cout << "The Roxy attacks, took hp of " << enemyAt << endl;
+        
+                                        PlayHp -= enemyAt;
+                                    }
+                                    else
+                                    {
+                                        cout << "\nPlayer defended the attack\n";
+                                    }
+                                }
+                                cout << "Player hp is  : \n" << PlayHp << endl;
+                            }
+                            if (PlayHit >= enemyDe)
+                            {
+                                cout << Name << " attacks" << endl;
+                                enemyHP -= PlayAttack;
+                            }
+                            else if (PlayHit < enemyDe)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 80)
+                                {
+                                    cout << Name << " attacks" << endl;
+                                    enemyHP -= PlayAttack;
+                                }
+                                else
+                                    cout << "Enemy defended the attack\n";
+                            }
+                            if (enemyHP <= 0)
+                            {
+                                enemyHP = 0;
+                                cout << "Roxy is dead" << endl;
+                                break;
+                            }
+                            if (PlayHp <= 0)
+                            {
+                                PlayHp = 0;
+                                cout << "You are dead" << endl;
+                                break;
+                            }
+                            else
+                                cout << "Roxy Hp is  : " << enemyHP << endl;
+                            if (enemyHit > PlayDefence)
+                            {
+                                cout << "The Roxy attacks, " << endl;
+                                PlayHp -= enemyAt;
+                                cout << "took hp of " << enemyAt << endl;
+                            }
+                            else if (enemyHit < PlayDefence)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 50)
+                                {
+                                    cout << "The Roxy attacks, took hp of " << enemyAt << endl;
+        
+                                    PlayHp -= enemyAt;
+                                }
+                                else
+                                {
+                                    cout << "\nPlayer defended the attack\n";
+                                }
+                            }
+                            cout << "Player hp is  : \n" << PlayHp << endl;
+                        }
+                        else if (userChoice == 2)
+                        {
+                            cout << "You chose to make a special attack" << endl;
+                            if (PlaySpeed < enemySpeed)
+                            {
+                                if (enemyHit > PlayDefence)
+                                {
+                                    cout << "The Roxy attacks and took the hp of " << enemySpA << endl;
+                                    PlayHp -= enemySpA;
+                                }
+                                else if (enemyHit < PlayDefence)
+                                {
+                                    int rand1 = (rand() % 100 + 1);
+                                    if (rand1 >= 50)
+                                    {
+                                        cout << "The Roxy attacks and took the hp of " << enemySpA << endl;
+                                        PlayHp -= enemySpA;
+                                    }
+                                    else
+                                        cout << "you defended the attack" << endl;
+                                }
+                                cout << "PLayer hp is  : " << PlayHp << endl;
+                            }
+                            if (PlaySpHit >= enemySpD)
+                            {
+                                cout << Name << " Attacks" << endl;
+                                enemyHP -= PlaySpAttack;
+                                cout << "You hit the enemy for " << PlaySpAttack << "Hitpoints" << endl;
+                            }
+                            else if (PlaySpHit < enemySpD)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 80)
+                                {
+                                    cout << "You attacked" << endl;
+                                    enemyHP -= PlaySpAttack;
+                                    cout << "You hit the enemy for " << PlaySpAttack << "Hitpoints" << endl;
+                                }
+                                else
+                                    cout << "Enemy defended the attack" << endl;
+                            }
+        
+                            if (enemyHP <= 0)
+                            {
+                                enemyHP = 0;
+                                cout << "Roxy is dead\nYou won the Game!!\nGame Over" << endl;
+                                break;
+                            }
+                            
+                            if (enemyHit > PlayDefence)
+                            {
+                                cout << "The Roxy attacks and took the hp of " << enemyAt << endl;
+                                PlayHp -= enemyAt;
+                            }
+                            else if (enemyHit < PlayDefence)
+                            {
+                                int rand1 = (rand() % 100 + 1);
+                                if (rand1 >= 50)
+                                {
+                                    cout << "The Roxy attacks and took the hp of " << enemySpA << endl;
+                                    PlayHp -= enemySpA;
+                                }
+                                else
+                                    cout << "you defended the attack" << endl;
+                            }
+                            
+                            if (PlayHp <= 0)
+                            {
+                                PlayHp = 0;
+                                cout << "Player hp is  : " << PlayHp << endl;
+                                cout << "You are dead" << endl;
+                                break;
+                            }
+                            else
+                                cout << "Roxy Hp is  : " << enemyHP << endl;
+                            cout << "PLayer hp is  : " << PlayHp << endl;
+                        }
+                       
+        
+                    } break;
+                default:
+                    cout << "Game Over!!!" << endl;
+                    break;
+                }
+                
+            }
+        
+           
+        }
+    </pre>
+</p>        
+        </body>
+    </html>
