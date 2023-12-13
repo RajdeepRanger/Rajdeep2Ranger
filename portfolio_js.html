@@ -10,37 +10,46 @@
     </head>
     <body>
        <h1> Code I have learnt so far : </h1> <p> 
-       //"Name" is String, 4.5 is float, true is boolean, 66 is integer<br>
-let a = true;//local scope<br>
-var b= "name";//global scope<br>
-const pi=3.14;//constant say tax or pi<br>
-<br>
-console.log(pi);<br>
-<br>
-const MaxInventory = 12;<br>
-var inventory = 4;<br>
-<br>
-var itemsOnTable = 5;<br>
-console.log( "Current Inventory Size= " + inventory); <br>
-<br>
-inventory += itemsOnTable;<br>
-console.log( "Current Inventory Size= " + inventory);<br>
-<br>
-if (itemsOnTable + inventory <= MaxInventory) {<br>
-  inventory += itemsOnTable;<br>
-  console.log( "Current Inventory Size= " + inventory);<br>
-}<br>
-else {<br>
-  let difference = MaxInventory - inventory;<br>
-  console.log("Difference = ",difference);<br>
-  <br>
-  inventory += difference;<br>
-  console.log ("Not enough space for ", itemsOnTable, "items, adding ", difference," to inventory");<br>
-   console.log( "Current Inventory Size= " + inventory);<br>
-}<br>
-for (let ii=0; ii<11; ii++){<br>
-  console.log(ii);<br>
-}<br> </p> 
+       <pre>
+           function sendData() {
+    const queryString = window.location.search;
+            const url = new URLSearchParams(queryString);
+            const ind = url.get('index');
+            const aid = parseInt(ind);
+            console.log(aid);
 
+
+    var jsObject = {
+        gameID: `${aid}`,
+        player: document.getElementById('player').value,
+        score:document.getElementById('score').value ,
+        time:document.getElementById('time').value ,
+    };
+
+    console.log(JSON.stringify(jsObject));
+    var whatever = document.getElementById('whatever');
+    whatever = `action = "https://lime-faithful-hippo.cyclic.app/api/leaderBoard/${aid}"`;
+    fetch(`https://lime-faithful-hippo.cyclic.app/api/leaderBoard/${aid}`, {
+        method: "POST",
+        mode: "cors",
+        credentials: "same-origin",
+        body: JSON.stringify(jsObject),
+        headers: { "Content-Type": "application/json" }
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function(data){
+            console.log(data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        setTimeout(() => {
+        window.location.href = `html3.html?index=${aid-2}`;
+    }, 1000);
+}
+
+       </pre> </p>
     </body>
 </html>
